@@ -39,12 +39,13 @@ export default function Login(props) {
                 if(typeof data.access !== "undefined"){
                     // The token will be used to retrieve user information across the whole frontend application and storing it in the localStorage to allow ease of access to the user's information
                     localStorage.setItem('token', data.access);
+                    
                     retrieveUserDetails(data.access);
 
                     Swal.fire({
                         title: "Login Successful",
                         icon: "success",
-                        text: "Welcome to Zuitt!"
+                        text: "Welcome to PieZada!"
                     })
                 }
                 else{
@@ -84,10 +85,10 @@ export default function Login(props) {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-
                 setUser({
                     id: data._id,
-                    isAdmin: data.isAdmin
+                    isAdmin: data.isAdmin,
+                    token: token
                 })
             })
         }

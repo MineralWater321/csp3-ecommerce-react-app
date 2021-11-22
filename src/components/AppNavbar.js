@@ -10,7 +10,7 @@ export default function AppNavbar(){
 	// State to store the user information stored in the login page
 	// const [user, setUser] = useState(localStorage.getItem("email"));
 	// console.log(user);
-
+	const bearer = localStorage.getItem('token');
 	const { user } = useContext(UserContext);
 	console.log({user});
 	return(
@@ -21,20 +21,14 @@ export default function AppNavbar(){
 			    <Nav className="ml-auto">
 			      <Nav.Link as={NavLink} to="/" exact>Home</Nav.Link>
 			      <Nav.Link as={NavLink} to="/products" exact>Products</Nav.Link>
-			      {(user.id !== null) ? 
-						  (user.isAdmin !== true) ?
-							<Fragment>
-								<Nav.Link as={NavLink} to="/cart" exact>Cart</Nav.Link>
-								<Nav.Link as={NavLink} to="/logout" exact>Logout</Nav.Link>
-							</Fragment>
-							:
-                        	<Nav.Link as={NavLink} to="/logout" exact>Logout</Nav.Link>
-								
+			      {(bearer === null) ? 
+						<Fragment>
+							<Nav.Link as={NavLink} to="/login" exact>Login</Nav.Link>
+							<Nav.Link as={NavLink} to="/register" exact>Register</Nav.Link>
+						</Fragment>
+						
                         :
-                        <Fragment>
-                            <Nav.Link as={NavLink} to="/login" exact>Login</Nav.Link>
-                            <Nav.Link as={NavLink} to="/register" exact>Register</Nav.Link>
-                        </Fragment>
+                        <Nav.Link as={NavLink} to="/logout" exact>Logout</Nav.Link>
 					}
 			    </Nav>
 		    </Navbar.Collapse>

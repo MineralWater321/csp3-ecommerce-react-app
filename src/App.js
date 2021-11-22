@@ -14,9 +14,11 @@ import './App.css';
 import { UserProvider } from './UserContext';
 
 function App() {
+
   const [user, setUser] = useState({
     id: null,
-    isAdmin: null
+    isAdmin: null,
+    token: null
   })
 
   const unsetUser = () => {

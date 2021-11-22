@@ -15,7 +15,7 @@ export default function Products(){
 
 			setProducts(data.map(product => {
 					return(
-						<ProductCard key={product.id} productProp={product} />
+						<ProductCard key={product._id} productProp={product} />
 					)
 				})
 			);

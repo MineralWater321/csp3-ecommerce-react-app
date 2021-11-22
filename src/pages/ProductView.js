@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router'
 import { Container, Card, Button, Col } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom'
 import Swal from 'sweetalert2';
 
 export default function ProductView() {
@@ -8,16 +9,26 @@ export default function ProductView() {
 	const [description, setDescription] = useState("");
 	const [price, setPrice] = useState(0);
     const { productId } = useParams();
-	const [orderCount, setOrderCount] = useState(1);
+	const [orderCount, setOrderCount] = useState(0);
 
     console.log(productId);
 	console.log(orderCount);
 
 	function addToCart(e) {
 		// e.preventDefault();
-		setOrderCount(orderCount + 1);
+		
 		const token = localStorage.getItem('token')
-
+		console.log(token);
+		if(token === null){
+			Swal.fire({
+				title: 'Login first before placing order.',
+				icon: 'error',
+				text: `Go to Login Page`
+			});
+			<Redirect to="/login" />
+			return
+		}
+		setOrderCount(orderCount + 1);
 		fetch('http://localhost:4000/users/addToCart', {
 			method: 'POST',
 			headers: {
@@ -32,11 +43,11 @@ export default function ProductView() {
 		.then(res => res.json())
         .then(data => {
             console.log(data);
-
+			
 			if(data !== 'noAdmin'){
 				if(data !== 'notOnSale'){
 					
-
+					
 					Swal.fire({
                         title: 'Order created',
                         icon: 'success',
@@ -70,13 +81,13 @@ export default function ProductView() {
 		<Container className="mt-5">
 			<Col>
 				<Card>
-					<Card.Body className="text-center"  onsubmit={(e) => addToCart(e)}>
+					<Card.Body className="text-center"  onSubmit={(e) => addToCart(e)}>
 						<Card.Title>{name}</Card.Title>
 						<Card.Subtitle>Description</Card.Subtitle>
 						<Card.Text>{description}</Card.Text>
 						<Card.Subtitle>Price</Card.Subtitle>
 						<Card.Text>{price}</Card.Text>
-						<Button variant="primary" onClick={addToCart} block>Add to Cart</Button>
+						<Button variant="primary" onClick={addToCart}>Add to Cart</Button>
 					</Card.Body>
 				</Card>
 			</Col>
