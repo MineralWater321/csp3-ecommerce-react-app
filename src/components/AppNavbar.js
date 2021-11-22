@@ -12,7 +12,7 @@ export default function AppNavbar(){
 	// console.log(user);
 
 	const { user } = useContext(UserContext);
-
+	console.log({user});
 	return(
 		<Navbar bg="dark" variant="dark">
 		    <Navbar.Brand as={NavLink} to="/" exact>PieZada</Navbar.Brand>
@@ -22,14 +22,20 @@ export default function AppNavbar(){
 			      <Nav.Link as={NavLink} to="/" exact>Home</Nav.Link>
 			      <Nav.Link as={NavLink} to="/products" exact>Products</Nav.Link>
 			      {(user.id !== null) ? 
-                        <Nav.Link as={NavLink} to="/logout" exact>Logout</Nav.Link>
+						  (user.isAdmin !== true) ?
+							<Fragment>
+								<Nav.Link as={NavLink} to="/cart" exact>Cart</Nav.Link>
+								<Nav.Link as={NavLink} to="/logout" exact>Logout</Nav.Link>
+							</Fragment>
+							:
+                        	<Nav.Link as={NavLink} to="/logout" exact>Logout</Nav.Link>
+								
                         :
                         <Fragment>
                             <Nav.Link as={NavLink} to="/login" exact>Login</Nav.Link>
                             <Nav.Link as={NavLink} to="/register" exact>Register</Nav.Link>
                         </Fragment>
-                    }  
-
+					}
 			    </Nav>
 		    </Navbar.Collapse>
 	  	</Navbar>
