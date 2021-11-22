@@ -1,24 +1,49 @@
-import logo from './logo.svg';
+import Home from './pages/Home';
+import Products from './pages/Products';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Logout from './pages/Logout';
+import ProductView from './pages/ProductView';
+import { useState, useEffect } from 'react';
+import { Container } from 'react-bootstrap';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import AppNavbar from './components/AppNavbar';
 import './App.css';
+import { UserProvider } from './UserContext';
 
 function App() {
+  const [user, setUser] = useState({
+    id: null,
+    isAdmin: null
+  })
+
+  const unsetUser = () => {
+    localStorage.clear();
+  }
+
+  useEffect(() => {
+    console.log(user);
+    console.log(localStorage);
+  }, [user])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserProvider value={{user, setUser, unsetUser}}>
+        <Router>
+          <AppNavbar />
+          <Container>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/products" component={Products} />
+              <Route exact path="/products/:productId" component={ProductView} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/logout" component={Logout} />
+              <Route exact path="/register" component={Register} />
+              <Route component={Error} />
+            </Switch>
+            </Container>
+        </Router>
+    </UserProvider>
   );
 }
 
