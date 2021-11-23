@@ -1,28 +1,24 @@
 // import { useState } from 'react';
 // Proptypes - used to validate props
 import PropTypes from 'prop-types'
-import { Card } from 'react-bootstrap';
+// import { Card, Table } from 'react-bootstrap';
 // import { Link } from 'react-router-dom';
 
 export default function OrderCard({orderProp}) {
 	console.log(orderProp);
 	const { productName, totalAmount, totalPrice} = orderProp;
-
+    const itemPrice = totalPrice/totalAmount;
 	// State hook - used to keep track of information related to individual components
 	// Syntax: const [getter, setter] = useState(initialGetterValue);
 	
 
     return (
-        <Card className="mb-3">
-            <Card.Body >
-                <Card.Title>{productName}</Card.Title>
-                <Card.Subtitle>Number of Orders:</Card.Subtitle>
-                <Card.Text>{totalAmount}</Card.Text>
-                <Card.Subtitle>Amount to Pay:</Card.Subtitle>
-                <Card.Text>PhP {totalPrice}</Card.Text>
-                {/* <Link className="btn btn-primary" to={`/products/${_id}`}>Details</Link>  */}
-            </Card.Body>
-        </Card>
+        <tr>
+            <td>{productName}</td>
+            <td>{itemPrice}</td>            
+            <td>{totalAmount}</td>
+            <td>{totalPrice}</td>            
+        </tr>
     )
 }
 

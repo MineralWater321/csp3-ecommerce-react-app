@@ -56,18 +56,7 @@ export default function Login(props) {
                 }
             })
 
-            // Set the email of the authenticated user in the local storage
-            // Syntax: localStorage.setItem('propertyName', value);
-            //localStorage.setItem('email', email);
-
-            // Set the global user state to have properties obtained from local storage
-            // Though access to the user information can be done via the localStorage this is necessary to update the user state which will help update the App component and rerender it to avoid refreshing the page upon user login and logout
-            // When states change components are rerendered and the AppNavbar component will be updated based on the user credentials, unlike when using the localStorage where the localStorage does not trigger component rerendering
-            /*setUser({
-                email: localStorage.getItem('email')
-            });*/
-
-	        // Clear input fields after submission
+            // Clear input fields after submission
 	        setEmail('');
 	        setPassword('');
 
@@ -75,22 +64,6 @@ export default function Login(props) {
 
 	    }
 
-        // const retrieveUserDetails = (token) => {
-        //     fetch('http://localhost:4000/users/details', {
-        //         headers: {
-        //             Authorization: `Bearer ${ token }`
-        //         }
-        //     })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log(data);
-        //         setUser({
-        //             id: data._id,
-        //             isAdmin: data.isAdmin,
-        //             token: token
-        //         })
-        //     })
-        // }
 
 		useEffect(() => {
 

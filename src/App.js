@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import Logout from './pages/Logout';
 import ProductView from './pages/ProductView';
 import Cart from './pages/Cart';
+import OrderHistory from './pages/OrderHistory';
 import { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -39,6 +40,7 @@ function App() {
               <Route exact path="/logout" component={Logout} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/cart" component={Cart} />
+              <Route exact path="/checkout" component={OrderHistory} />
               <Route component={Error} />
             </Switch>
             </Container>

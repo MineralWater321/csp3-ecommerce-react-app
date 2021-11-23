@@ -1,6 +1,8 @@
 import { Fragment, useEffect, useState, useContext } from 'react';
 import OrderCard from '../components/OrderCard';
 import UserContext from '../UserContext';
+import { Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 export default function Cart(){
 	// console.log(productData);
@@ -8,7 +10,8 @@ export default function Cart(){
 
 	const [orders, setOrders] = useState([]);
 	const { bearer } = useContext(UserContext);
-
+	const [total, setTotal] = useState(0);
+	
 	useEffect(() => {
 		fetch('http://localhost:4000/users/myOrders', {
 			headers: {
@@ -17,8 +20,6 @@ export default function Cart(){
 		})
 		.then(res => res.json())
 		.then(data => {
-			console.log(data);
-
 			setOrders(data.map(order => {
 					return(
 						<OrderCard key={order._id} orderProp={order} />
@@ -31,7 +32,25 @@ export default function Cart(){
 
 	return (
 		<Fragment>
-			{orders}
+			<Table striped bordered hover>
+				<thead>
+					<tr>
+						<th>Item Name</th>
+						<th>Item Price</th>						
+						<th>Qty</th>
+						<th>Subtotal</th>
+					</tr>
+				</thead>
+				<tbody>
+					{orders}
+				</tbody>
+				<tfoot>
+					<td colSpan="3">
+					<Link className="btn btn-primary" to={`/checkout`}>Checkout Items</Link> 
+					</td>
+					<td>{total}</td>
+				</tfoot>
+			</Table>
 		</Fragment>
 	)
 }
