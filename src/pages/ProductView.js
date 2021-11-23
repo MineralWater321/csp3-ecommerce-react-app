@@ -28,7 +28,7 @@ export default function ProductView() {
 			return
 		}
 		setOrderCount(orderCount + 1);
-		fetch('http://localhost:4000/users/addToCart', {
+		fetch('https://polar-wildwood-60933.herokuapp.com/users/addToCart', {
 			method: 'POST',
 			headers: {
 				'Authorization': `Bearer ${token}`,
