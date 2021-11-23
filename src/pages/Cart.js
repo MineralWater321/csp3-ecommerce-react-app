@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState, useContext, useRef } from 'react';
+import { Fragment, useEffect, useState, useContext } from 'react';
 import CartCard from '../components/CartCard';
 import UserContext from '../UserContext';
 import { Table } from 'react-bootstrap';

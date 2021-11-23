@@ -27,8 +27,35 @@ export default function ProductView() {
 			<Redirect to="/login" />
 			return
 		}
-		setOrderCount(orderCount + 1);		
+		setOrderCount(orderCount + 1);
+		fetch('http://localhost:4000/users/addToCart', {
+			method: 'POST',
+			headers: {
+				'Authorization': `Bearer ${token}`,
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				productId: productId,
+				quantity: orderCount
+			})
+		})
+		.then(res => res.json())
+        .then(data => {
+            console.log(data);
+
+			
+			if(data !== 'noAdmin'){
+				if(data !== 'notOnSale'){
+					Swal.fire({
+                        title: 'Order created',
+                        icon: 'success',
+                        text: 'Product is not available for sale'
+					});
+				}
+			}
+		})
 	}
+
 
     useEffect(() => {
 		fetch(`https://polar-wildwood-60933.herokuapp.com/products/${ productId }`)
