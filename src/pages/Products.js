@@ -12,7 +12,7 @@ export default function Products(){
 	let productData = [];
 	
 	useEffect(() => {
-		fetch('http://localhost:4000/products/all')
+		fetch('https://polar-wildwood-60933.herokuapp.com/products/all')
 		.then(res => res.json())
 		.then(data => {
 			console.log(data);
