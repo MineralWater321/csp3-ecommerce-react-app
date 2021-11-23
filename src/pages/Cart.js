@@ -23,9 +23,11 @@ export default function Cart(){
 		.then(data => {
 			console.log(data)
 
-			setOrders(data.map((orders) => (
-				<CartCard key={orders._id} orderProp={orders} />		
-			)));
+			setOrders(data.map((orders) => {	
+				return(
+				<CartCard key={orders._id} orderProp={orders} />
+				)		
+			}));
 		});
 	}, [bearer])
 	
