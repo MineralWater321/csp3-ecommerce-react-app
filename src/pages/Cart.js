@@ -23,7 +23,7 @@ export default function Cart(){
 		.then(data => {
 			console.log(data)
 
-			setOrders(data.map((orders, index) => (
+			setOrders(data.map((orders) => (
 				<CartCard key={orders._id} orderProp={orders} />		
 			)));
 		});
