@@ -18,10 +18,11 @@ import { UserProvider } from './UserContext';
 function App() {
 
   const [bearer, setBearer] = useState(localStorage.getItem('token'));
-
+  
   const unsetUser = () => {
     localStorage.clear();
   }
+  
 
   useEffect(() => {
     console.log(bearer);
@@ -29,24 +30,24 @@ function App() {
   }, [bearer])
 
   return (
-    <UserProvider value={{bearer, setBearer, unsetUser}}>
-        <Router>
-          <AppNavbar />
-          <Container>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/products" component={Products} />
-              <Route exact path="/products/:productId" component={ProductView} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/logout" component={Logout} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/cart" component={Cart} />
-              <Route exact path="/checkout" component={OrderHistory} />
-              <Route exact path="/admin" component={Admin} />
-              <Route component={Error} />
-            </Switch>
-            </Container>
-        </Router>
+    <UserProvider value={{bearer, setBearer, unsetUser}}>        
+      <Router>
+        <AppNavbar />
+        <Container>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/products" component={Products} />
+            <Route exact path="/products/:productId" component={ProductView} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/logout" component={Logout} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/cart" component={Cart} />
+            <Route exact path="/checkout" component={OrderHistory} />
+            <Route exact path="/admin" component={Admin} />
+            <Route component={Error} />
+          </Switch>
+          </Container>
+      </Router>
     </UserProvider>
   );
 }

@@ -1,8 +1,9 @@
-import { Fragment, useEffect, useState, useContext } from 'react';
-import OrderCard from '../components/OrderCard';
+import { Fragment, useEffect, useState, useContext, useRef } from 'react';
+import CartCard from '../components/CartCard';
 import UserContext from '../UserContext';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
 
 export default function Cart(){
 	// console.log(productData);
@@ -12,7 +13,8 @@ export default function Cart(){
 	const { bearer } = useContext(UserContext);
 	
 	useEffect(() => {
-		fetch('http://localhost:4000/users/myOrders', {
+
+		fetch('https://polar-wildwood-60933.herokuapp.com/users/myOrders', {
 			headers: {
 				'Authorization': `Bearer ${ bearer }`
 			}
@@ -20,15 +22,14 @@ export default function Cart(){
 		.then(res => res.json())
 		.then(data => {
 			console.log(data)
-			setOrders(data.map(order => {
-					return(
-						<OrderCard key={order._id} orderProp={order} />					
-					)		
-				})
-			);
+
+			setOrders(data);
 		});
 	}, [bearer])
-		
+	
+	const orderList = orders.map((orders, index) => (
+		<CartCard key={orders._id} orderProp={orders} />		
+	))
 
 	return (
 		<Fragment>
@@ -42,14 +43,16 @@ export default function Cart(){
 					</tr>
 				</thead>
 				<tbody>
-					{orders}
+					{orderList}
 				</tbody>
-				<tfoot>
-					<td colSpan="3">
-					<Link className="btn btn-primary" to={`/checkout`}>Checkout Items</Link> 
-					</td>
-					<td>asdasd</td>
-				</tfoot>
+				<thead>
+					<tr>
+						<th colSpan="3">
+						<Link className="btn btn-primary" to={`/checkout`}>Checkout Items</Link> 
+						</th>
+						<th>asdasd</th>
+					</tr>
+				</thead>
 			</Table>
 		</Fragment>
 	)

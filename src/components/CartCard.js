@@ -4,12 +4,10 @@ import PropTypes from 'prop-types';
 // import { Card, Table } from 'react-bootstrap';
 // import { Link } from 'react-router-dom';
 
-export default function OrderCard({orderProp}) {
+export default function CartCard({orderProp}) {
 	console.log(orderProp);
 	const { productName, totalAmount, totalPrice} = orderProp;
     const itemPrice = totalPrice/totalAmount;
-	// State hook - used to keep track of information related to individual components
-	// Syntax: const [getter, setter] = useState(initialGetterValue);
 
     return (
         <tr>
@@ -22,7 +20,7 @@ export default function OrderCard({orderProp}) {
 }
 
 // Checks the validity of the PropTypes
-OrderCard.propTypes = {
+CartCard.propTypes = {
 	// "shape" method is used to check if a prop object conforms to a specific shape
 	product: PropTypes.shape({
 		name: PropTypes.string.isRequired,

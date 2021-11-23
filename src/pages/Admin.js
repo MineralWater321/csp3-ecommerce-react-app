@@ -1,6 +1,6 @@
 // import { Fragment } from 'react';
 // import Banner from '../components/Banner';
-import { Button, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 export default function Admin(){
     // const data={

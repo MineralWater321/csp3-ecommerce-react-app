@@ -18,7 +18,7 @@ export default function Login(props) {
 	        // Prevents page redirection via form submission
 	        e.preventDefault();
 
-            fetch('http://localhost:4000/users/login', {
+            fetch('https://polar-wildwood-60933.herokuapp.com/users/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

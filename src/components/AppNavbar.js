@@ -15,7 +15,7 @@ export default function AppNavbar(){
 	
 	return(
 		<Navbar bg="dark" variant="dark">
-		    <Navbar.Brand as={NavLink} to="/" exact>PieZada</Navbar.Brand>
+		    <Navbar.Brand as={NavLink} to="/" exact>The Pie Shop</Navbar.Brand>
 		    <Navbar.Toggle aria-controls="basic-navbar-nav" />
 		    <Navbar.Collapse id="basic-navbar-nav">
 			    <Nav className="ml-auto">

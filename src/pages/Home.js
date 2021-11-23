@@ -5,7 +5,7 @@ import Banner from '../components/Banner';
 
 export default function Home(){
 	const data={
-		title: "PieZada",
+		title: "The Pie Shop",
 		content: "The Ecommerce Website For Pies",
 		destination: "/products",
 		label: "Buy now!"

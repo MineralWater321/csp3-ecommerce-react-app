@@ -29,7 +29,7 @@ export default function Register() {
         // Prevents page redirection via form submission
         e.preventDefault();
 
-        fetch('http://localhost:4000/users/checkEmail', {
+        fetch('https://polar-wildwood-60933.herokuapp.com/users/checkEmail', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ export default function Register() {
 
             } else {
 
-                fetch('http://localhost:4000/users/register', {
+                fetch('https://polar-wildwood-60933.herokuapp.com/users/register', {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json'
