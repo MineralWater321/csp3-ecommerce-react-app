@@ -6,13 +6,12 @@ import UserContext from '../UserContext';
 
 export default function Login(props) {
         // Allows us to consume the User context object and it's properties to use for user validation
-        const {user, setUser} = useContext(UserContext);
+        const { bearer, setBearer } = useContext(UserContext);
 		// State hooks to store the values of the input fields
 		const [email, setEmail] = useState('');
 	    const [password, setPassword] = useState('');
 	    // State to determine whether submit button is enabled or not
 	    const [isActive, setIsActive] = useState(false);
-
 	    function authenticate(e) {
 
 	        // Prevents page redirection via form submission
@@ -38,9 +37,9 @@ export default function Login(props) {
                 // If no user information is found, the "access" property will not be available and will return undefined
                 if(typeof data.access !== "undefined"){
                     // The token will be used to retrieve user information across the whole frontend application and storing it in the localStorage to allow ease of access to the user's information
-                    localStorage.setItem('token', data.access);
+                    setBearer(localStorage.setItem('token', data.access));
                     
-                    retrieveUserDetails(data.access);
+                    // retrieveUserDetails(data.access);
 
                     Swal.fire({
                         title: "Login Successful",
@@ -76,22 +75,22 @@ export default function Login(props) {
 
 	    }
 
-        const retrieveUserDetails = (token) => {
-            fetch('http://localhost:4000/users/details', {
-                headers: {
-                    Authorization: `Bearer ${ token }`
-                }
-            })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setUser({
-                    id: data._id,
-                    isAdmin: data.isAdmin,
-                    token: token
-                })
-            })
-        }
+        // const retrieveUserDetails = (token) => {
+        //     fetch('http://localhost:4000/users/details', {
+        //         headers: {
+        //             Authorization: `Bearer ${ token }`
+        //         }
+        //     })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         console.log(data);
+        //         setUser({
+        //             id: data._id,
+        //             isAdmin: data.isAdmin,
+        //             token: token
+        //         })
+        //     })
+        // }
 
 		useEffect(() => {
 
@@ -106,7 +105,7 @@ export default function Login(props) {
 
 
     return (
-            (user.id !== null) ?
+            (bearer !== null) ?
                 <Redirect to="/products" />
             :
             <Form onSubmit={(e) => authenticate(e)}>

@@ -10,9 +10,9 @@ export default function AppNavbar(){
 	// State to store the user information stored in the login page
 	// const [user, setUser] = useState(localStorage.getItem("email"));
 	// console.log(user);
-	const bearer = localStorage.getItem('token');
-	const { user } = useContext(UserContext);
-	console.log({user});
+	const { bearer } = useContext(UserContext);
+	console.log({bearer});
+	
 	return(
 		<Navbar bg="dark" variant="dark">
 		    <Navbar.Brand as={NavLink} to="/" exact>PieZada</Navbar.Brand>
@@ -28,7 +28,10 @@ export default function AppNavbar(){
 						</Fragment>
 						
                         :
-                        <Nav.Link as={NavLink} to="/logout" exact>Logout</Nav.Link>
+						<Fragment>
+                        	<Nav.Link as={NavLink} to="/cart" exact>Cart</Nav.Link>
+							<Nav.Link as={NavLink} to="/logout" exact>Logout</Nav.Link>
+						</Fragment>
 					}
 			    </Nav>
 		    </Navbar.Collapse>

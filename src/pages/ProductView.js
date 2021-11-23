@@ -9,7 +9,7 @@ export default function ProductView() {
 	const [description, setDescription] = useState("");
 	const [price, setPrice] = useState(0);
     const { productId } = useParams();
-	const [orderCount, setOrderCount] = useState(0);
+	const [orderCount, setOrderCount] = useState(1);
 
     console.log(productId);
 	console.log(orderCount);
@@ -23,7 +23,7 @@ export default function ProductView() {
 			Swal.fire({
 				title: 'Login first before placing order.',
 				icon: 'error',
-				text: `Go to Login Page`
+				text: 'Go to Login Page'
 			});
 			<Redirect to="/login" />
 			return

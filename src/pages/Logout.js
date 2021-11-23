@@ -3,13 +3,13 @@ import { Redirect } from 'react-router-dom';
 import UserContext from '../UserContext';
 
 export default function Logout(){
-	const { unsetUser, setUser }= useContext(UserContext);
+	const { unsetUser, setBearer }= useContext(UserContext);
 
 	unsetUser();
 
 	useEffect(() => {
 		// Set the user state back to it's original value
-		setUser({id: null});
+		setBearer(localStorage.getItem('token'));
 	})
 
 	// Redirect back to login
