@@ -6,7 +6,7 @@ import UserContext from '../UserContext';
 
 export default function Register() {
 
-    const {user} = useContext(UserContext);
+    const {bearer} = useContext(UserContext);
     const history = useHistory();
 
     // State hooks to store the values of the input fields
@@ -119,7 +119,7 @@ export default function Register() {
     }, [firstName, lastName, email, mobileNo, password1, password2]);
 
     return (
-        (user.id !== null) ?
+        (bearer !== null) ?
             <Redirect to="/products" />
         :
             <Form onSubmit={(e) => registerUser(e)}>
