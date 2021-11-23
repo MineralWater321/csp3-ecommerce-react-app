@@ -6,6 +6,7 @@ import Logout from './pages/Logout';
 import ProductView from './pages/ProductView';
 import Cart from './pages/Cart';
 import OrderHistory from './pages/OrderHistory';
+import Admin from './pages/Admin'
 import { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -16,7 +17,7 @@ import { UserProvider } from './UserContext';
 
 function App() {
 
-  const [bearer, setBearer] = useState(localStorage.getItem('token'))
+  const [bearer, setBearer] = useState(localStorage.getItem('token'));
 
   const unsetUser = () => {
     localStorage.clear();
@@ -41,6 +42,7 @@ function App() {
               <Route exact path="/register" component={Register} />
               <Route exact path="/cart" component={Cart} />
               <Route exact path="/checkout" component={OrderHistory} />
+              <Route exact path="/admin" component={Admin} />
               <Route component={Error} />
             </Switch>
             </Container>

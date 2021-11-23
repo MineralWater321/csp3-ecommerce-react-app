@@ -1,6 +1,6 @@
 // import { useState } from 'react';
 // Proptypes - used to validate props
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 // import { Card, Table } from 'react-bootstrap';
 // import { Link } from 'react-router-dom';
 
@@ -10,7 +10,6 @@ export default function OrderCard({orderProp}) {
     const itemPrice = totalPrice/totalAmount;
 	// State hook - used to keep track of information related to individual components
 	// Syntax: const [getter, setter] = useState(initialGetterValue);
-	
 
     return (
         <tr>

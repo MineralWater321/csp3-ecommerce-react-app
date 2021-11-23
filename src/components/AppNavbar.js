@@ -25,8 +25,7 @@ export default function AppNavbar(){
 						<Fragment>
 							<Nav.Link as={NavLink} to="/login" exact>Login</Nav.Link>
 							<Nav.Link as={NavLink} to="/register" exact>Register</Nav.Link>
-						</Fragment>
-						
+						</Fragment>						
                         :
 						<Fragment>
                         	<Nav.Link as={NavLink} to="/cart" exact>Cart</Nav.Link>

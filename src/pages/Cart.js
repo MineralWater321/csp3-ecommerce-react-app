@@ -10,7 +10,6 @@ export default function Cart(){
 
 	const [orders, setOrders] = useState([]);
 	const { bearer } = useContext(UserContext);
-	const [total, setTotal] = useState(0);
 	
 	useEffect(() => {
 		fetch('http://localhost:4000/users/myOrders', {
@@ -20,13 +19,14 @@ export default function Cart(){
 		})
 		.then(res => res.json())
 		.then(data => {
+			console.log(data)
 			setOrders(data.map(order => {
 					return(
-						<OrderCard key={order._id} orderProp={order} />
-					)
+						<OrderCard key={order._id} orderProp={order} />					
+					)		
 				})
 			);
-		})
+		});
 	}, [bearer])
 		
 
@@ -48,7 +48,7 @@ export default function Cart(){
 					<td colSpan="3">
 					<Link className="btn btn-primary" to={`/checkout`}>Checkout Items</Link> 
 					</td>
-					<td>{total}</td>
+					<td>asdasd</td>
 				</tfoot>
 			</Table>
 		</Fragment>

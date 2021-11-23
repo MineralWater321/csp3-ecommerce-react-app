@@ -12,15 +12,12 @@ export default function Login(props) {
 	    const [password, setPassword] = useState('');
 	    // State to determine whether submit button is enabled or not
 	    const [isActive, setIsActive] = useState(false);
+        
 	    function authenticate(e) {
 
 	        // Prevents page redirection via form submission
 	        e.preventDefault();
 
-            // Fetch request to process the backend API
-            // Syntax: fetch('url', {options})
-            // .then(res => res.json())
-            // .then(data => {})
             fetch('http://localhost:4000/users/login', {
                 method: 'POST',
                 headers: {
