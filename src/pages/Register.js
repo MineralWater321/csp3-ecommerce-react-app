@@ -84,7 +84,7 @@ export default function Register() {
                         Swal.fire({
                             title: 'Registration successful',
                             icon: 'success',
-                            text: 'Welcome to PieZada!'
+                            text: 'Welcome to The Pie Shop!'
                         });
 
                         // Allows us to redirect the user to the login page after registering for an account

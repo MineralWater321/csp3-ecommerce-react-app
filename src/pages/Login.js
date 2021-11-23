@@ -41,7 +41,7 @@ export default function Login(props) {
                     Swal.fire({
                         title: "Login Successful",
                         icon: "success",
-                        text: "Welcome to PieZada!"
+                        text: "Welcome to The Pie Shop!"
                     })
                 }
                 else{
