@@ -49,7 +49,7 @@ export default function ProductView() {
 					Swal.fire({
                         title: 'Order created',
                         icon: 'success',
-                        text: 'Product is not available for sale'
+                        text: 'Go to Checkout'
 					});
 				}
 			}
