@@ -23,13 +23,13 @@ export default function Cart(){
 		.then(data => {
 			console.log(data)
 
-			setOrders(data);
+			setOrders(data.map((orders, index) => (
+				<CartCard key={orders._id} orderProp={orders} />		
+			)));
 		});
 	}, [bearer])
 	
-	const orderList = orders.map((orders, index) => (
-		<CartCard key={orders._id} orderProp={orders} />		
-	))
+	
 
 	return (
 		<Fragment>
@@ -43,7 +43,7 @@ export default function Cart(){
 					</tr>
 				</thead>
 				<tbody>
-					{orderList}
+					{orders}
 				</tbody>
 				<thead>
 					<tr>
