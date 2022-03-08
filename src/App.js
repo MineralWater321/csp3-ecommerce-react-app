@@ -18,11 +18,11 @@ import { UserProvider } from './UserContext';
 function App() {
 
   const [bearer, setBearer] = useState(localStorage.getItem('token'));
-  
+
   const unsetUser = () => {
     localStorage.clear();
   }
-  
+
 
   useEffect(() => {
     console.log(bearer);
@@ -30,7 +30,7 @@ function App() {
   }, [bearer])
 
   return (
-    <UserProvider value={{bearer, setBearer, unsetUser}}>        
+    <UserProvider value={{ bearer, setBearer, unsetUser }}>
       <Router>
         <AppNavbar />
         <Container>
@@ -46,7 +46,7 @@ function App() {
             <Route exact path="/admin" component={Admin} />
             <Route component={Error} />
           </Switch>
-          </Container>
+        </Container>
       </Router>
     </UserProvider>
   );

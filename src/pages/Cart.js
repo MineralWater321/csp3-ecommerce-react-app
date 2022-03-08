@@ -5,41 +5,49 @@ import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 
-export default function Cart(){
+export default function Cart() {
 	// console.log(productData);
-	// console.log(productData[0]);
 
 	const [orders, setOrders] = useState([]);
+	const [total, setTotal] = useState('');
 	const { bearer } = useContext(UserContext);
-	
+
 	useEffect(() => {
 
-		fetch('https://polar-wildwood-60933.herokuapp.com/users/myOrders', {
+		fetch('http://localhost:4000/products/cartItems', {
 			headers: {
-				'Authorization': `Bearer ${ bearer }`
+				'Authorization': `Bearer ${bearer}`
 			}
 		})
-		.then(res => res.json())
-		.then(data => {
-			console.log(data)
+			.then(res => res.json())
+			.then(data => {
+				console.log(data)
 
-			setOrders(data.map((orders) => {	
-				return(
-				<CartCard key={orders._id} orderProp={orders} />
-				)		
-			}));
-		});
+				setOrders(data.map((orders) => {
+					return (
+						<CartCard key={orders._id} orderProp={orders} />
+					)
+				}));
+			});
+
+		fetch('http://localhost:4000/products/cartPrice', {
+			headers: {
+				'Authorization': `Bearer ${bearer}`
+			}
+		})
+			.then(res => res.json())
+			.then(data => {
+				setTotal(data);
+			});
 	}, [bearer])
-	
-	
 
 	return (
 		<Fragment>
-			<Table striped bordered hover>
+			<Table striped bordered hover className='mt-5'>
 				<thead>
 					<tr>
 						<th>Item Name</th>
-						<th>Item Price</th>						
+						<th>Item Price</th>
 						<th>Qty</th>
 						<th>Subtotal</th>
 					</tr>
@@ -50,9 +58,9 @@ export default function Cart(){
 				<thead>
 					<tr>
 						<th colSpan="3">
-						<Link className="btn btn-primary" to={`/checkout`}>Checkout Items</Link> 
+							<Link className="btn btn-primary" to={`/checkout`}>Checkout Items</Link>
 						</th>
-						<th>asdasd</th>
+						<th>{total}</th>
 					</tr>
 				</thead>
 			</Table>

@@ -5,37 +5,37 @@ import Swal from 'sweetalert2';
 import UserContext from '../UserContext';
 
 export default function Login(props) {
-        // Allows us to consume the User context object and it's properties to use for user validation
-        const { bearer, setBearer } = useContext(UserContext);
-		// State hooks to store the values of the input fields
-		const [email, setEmail] = useState('');
-	    const [password, setPassword] = useState('');
-	    // State to determine whether submit button is enabled or not
-	    const [isActive, setIsActive] = useState(false);
-        
-	    function authenticate(e) {
+    // Allows us to consume the User context object and it's properties to use for user validation
+    const { bearer, setBearer } = useContext(UserContext);
+    // State hooks to store the values of the input fields
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    // State to determine whether submit button is enabled or not
+    const [isActive, setIsActive] = useState(false);
 
-	        // Prevents page redirection via form submission
-	        e.preventDefault();
+    function authenticate(e) {
 
-            fetch('https://polar-wildwood-60933.herokuapp.com/users/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: email,
-                    password: password
-                })
+        // Prevents page redirection via form submission
+        e.preventDefault();
+
+        fetch('https://polar-wildwood-60933.herokuapp.com/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
             })
+        })
             .then(res => res.json())
             .then(data => {
                 console.log(data);
                 // If no user information is found, the "access" property will not be available and will return undefined
-                if(typeof data.access !== "undefined"){
+                if (typeof data.access !== "undefined") {
                     // The token will be used to retrieve user information across the whole frontend application and storing it in the localStorage to allow ease of access to the user's information
                     setBearer(localStorage.setItem('token', data.access));
-                    
+
                     // retrieveUserDetails(data.access);
 
                     Swal.fire({
@@ -44,7 +44,7 @@ export default function Login(props) {
                         text: "Welcome to The Pie Shop!"
                     })
                 }
-                else{
+                else {
                     Swal.fire({
                         title: "Authentication failed",
                         icon: "error",
@@ -53,65 +53,66 @@ export default function Login(props) {
                 }
             })
 
-            // Clear input fields after submission
-	        setEmail('');
-	        setPassword('');
+        // Clear input fields after submission
+        setEmail('');
+        setPassword('');
 
-	        //alert(`${email} has been verified! Welcome back!`);
+        //alert(`${email} has been verified! Welcome back!`);
 
-	    }
+    }
 
 
-		useEffect(() => {
+    useEffect(() => {
 
-	        // Validation to enable submit button when all fields are populated and both passwords match
-	        if(email !== '' && password !== ''){
-	            setIsActive(true);
-	        }else{
-	            setIsActive(false);
-	        }
+        // Validation to enable submit button when all fields are populated and both passwords match
+        if (email !== '' && password !== '') {
+            setIsActive(true);
+        } else {
+            setIsActive(false);
+        }
 
-	    }, [email, password]);
+    }, [email, password]);
 
 
     return (
-            (bearer !== null) ?
-                <Redirect to="/products" />
+        (bearer !== null) ?
+            <Redirect to="/products" />
             :
-            <div>
+            <div className='mt-4'>
                 <h1>Login</h1>
                 <Form onSubmit={(e) => authenticate(e)}>
                     <Form.Group controlId="userEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control 
-                            type="email" 
-                            placeholder="Enter email" 
+                        <Form.Control
+                            type="email"
+                            placeholder="Enter email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
                     </Form.Group>
 
-                    <Form.Group controlId="password">
+                    <Form.Group controlId="password" className='mb-3'>
                         <Form.Label>Password</Form.Label>
-                        <Form.Control 
-                            type="password" 
-                            placeholder="Password" 
+                        <Form.Control
+                            type="password"
+                            placeholder="Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
                     </Form.Group>
-                    { isActive ? 
+                    {isActive ?
                         <Button variant="primary" type="submit" id="submitBtn">
                             Submit
                         </Button>
-                        : 
+                        :
                         <Button variant="danger" type="submit" id="submitBtn" disabled>
                             Submit
                         </Button>
                     }
                 </Form>
             </div>
-        )  
+
+    )
 }

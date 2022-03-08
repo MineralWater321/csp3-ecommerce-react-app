@@ -8,17 +8,13 @@ export default function ProductView() {
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
 	const [price, setPrice] = useState(0);
-    const { productId } = useParams();
-	const [orderCount, setOrderCount] = useState(0);
-
-    console.log(productId);
-
+	const { productId } = useParams();
+	// const [orderCount, setOrderCount] = useState(0);
 	function addToCart(e) {
 		e.preventDefault();
-		
+		console.log(productId)
 		const token = localStorage.getItem('token')
-		console.log(token);
-		if(token === null){
+		if (token === null) {
 			Swal.fire({
 				title: 'Login first before placing order.',
 				icon: 'error',
@@ -27,50 +23,42 @@ export default function ProductView() {
 			<Redirect to="/login" />
 			return
 		}
-		setOrderCount(orderCount + 1);
-		fetch('https://polar-wildwood-60933.herokuapp.com/users/addToCart', {
+		fetch(`http://localhost:4000/products/${productId}/addToCart`, {
 			method: 'POST',
 			headers: {
-				'Authorization': `Bearer ${token}`,
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				productId: productId,
-				quantity: orderCount
-			})
-		})
-		.then(res => res.json())
-        .then(data => {
-            console.log(data);
-
-			
-			if(data !== 'noAdmin'){
-				if(data !== 'notOnSale'){
-					Swal.fire({
-                        title: 'Order created',
-                        icon: 'success',
-                        text: 'Go to Checkout'
-					});
-				}
+				'Authorization': `Bearer ${token}`
 			}
 		})
+			.then(data => {
+				console.log(data);
+
+				if (data !== 'noAdmin') {
+					if (data !== 'notOnSale') {
+						Swal.fire({
+							title: 'Order created',
+							icon: 'success',
+							text: 'Go to Checkout'
+						});
+					}
+				}
+			})
 	}
 
 
-    useEffect(() => {
-		fetch(`https://polar-wildwood-60933.herokuapp.com/products/${ productId }`)
-		.then(res => res.json())
-		.then(data => {
-			console.log(data);
+	useEffect(() => {
+		fetch(`http://localhost:4000/products/${productId}`)
+			.then(res => res.json())
+			.then(data => {
+				console.log(data);
 
-            setName(data.name);
-            setDescription(data.description);
-            setPrice(data.price);
-			
-		})
+				setName(data.name);
+				setDescription(data.description);
+				setPrice(data.price);
+
+			})
 	}, [productId])
 
-	return(
+	return (
 		<Row className="mt-5 mb-3">
 			<Col md={4}>
 			</Col>
